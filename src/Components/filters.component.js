@@ -11,7 +11,7 @@ export default class Filters extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/filters/filters')
+        axios.get('http://localhost:8000/api/v1/filters')
             .then(res => {
                 this.setState({ filters: res.data })
                 console.log(res.data);

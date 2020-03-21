@@ -19,7 +19,7 @@ export default class Edit extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/staff/staff/' + this.props.match.params.id)
+        axios.get('http://localhost:8000/api/v1/staff/' + this.props.match.params.id)
             .then(res => {
                 this.setState({
                     id: res.data.id,

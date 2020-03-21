@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import TableRow from './TableRow'
 import { Row, Col } from 'reactstrap';
-import { Link } from 'react-router-dom'
 
 
 export default class Index extends Component {
@@ -13,7 +12,7 @@ export default class Index extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/patients/patients')
+        axios.get('http://localhost:8000/api/v1/patients')
             .then(res => {
                 console.log(res);
                 this.setState({ patients: res.data })
@@ -36,9 +35,7 @@ export default class Index extends Component {
                     <Col xs="6">
                         <h3 align="center">Patients List</h3>
                     </Col>
-                    <Col xs="6">
-                        <Link to={"/AddPatient/"} className="btn btn-primary">Add Patient</Link>
-                    </Col>
+                   
 
                 </Row>
                 <table className="table table-striped" style={{ marginTop: 20 }}>

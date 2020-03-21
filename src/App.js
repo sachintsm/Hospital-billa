@@ -12,10 +12,10 @@ import Patients from './Components/patients.component';
 import Filters from './Components/filters.component';
 import Rooms from './Components/rooms.component';
 import Staff from './Components/staff.component';
-import AddPatient from './Components/addPatient';
+// import AddPatient from './Components/addPatient';
 import AddFilter from './Components/addFilter';
 import AddStaff from './Components/addStaff';
-import AddRooms from './Components/addRooms';
+// import AddRooms from './Components/addRooms';
 import AddToRoom from './Components/addToRoom';
 
 class App extends Component {
@@ -28,11 +28,11 @@ class App extends Component {
     }
   }
   componentDidMount() {
-    axios.get('http://localhost:4000/datetime')
+    axios.get('http://localhost:8000/api/v1/datetime')
       .then(res => {
         console.log(res.data);
         this.setState({
-          time: res.data ,
+          time: res.data.datetime ,
         })
 
       })
@@ -62,7 +62,7 @@ class App extends Component {
                   <Link to={'/staff'} className="nav-link">Staff</Link>
                 </li>
                 <li className="nav-item dateTime" style={{marginLeft: 30,marginTop: 7}}>
-                  <p>{this.state.time}</p>
+                  <p>Date : {this.state.time}</p>
                 </li>
               </ul>
             </div>
@@ -75,19 +75,20 @@ class App extends Component {
 
             <Route exact path='/viewPatient/:id' component={viewPatient}></Route>
             <Route exact path='/viewFilter/:id' component={viewFilter}></Route>
-            <Route exact path='/view/:id' component={viewRoom}></Route>
+            <Route exact path='/viewRoom/:id' component={viewRoom}></Route>
             <Route exact path='/viewStaff/:id' component={viewStaff}></Route>
             <Route exact path='/addToRoom/:id' component={AddToRoom}></Route>
+            
 
             <Route exact path='/' component={Patients}></Route>
             <Route exact path='/filters' component={Filters}></Route>
             <Route exact path='/rooms' component={Rooms}></Route>
             <Route exact path='/staff' component={Staff}></Route>
 
-            <Route exact path='/addPatient' component={AddPatient}></Route>
+            {/* <Route exact path='/addPatient' component={AddPatient}></Route> */}
             <Route exact path='/addFilter' component={AddFilter}></Route>
             <Route exact path='/addStaff' component={AddStaff}></Route>
-            <Route exact path='/addRooms' component={AddRooms}></Route>
+            {/* <Route exact path='/addRooms' component={AddRooms}></Route> */}
           </Switch>
         </div>
       </Router>

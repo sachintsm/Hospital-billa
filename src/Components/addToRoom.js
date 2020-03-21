@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios'
 
 class addToRoom extends Component {
 
@@ -23,26 +22,27 @@ class addToRoom extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        const obj = {
-            roomId: this.state.roomId,
-        }
-        axios.post('http://localhost:4000/rooms/available/' + this.props.match.params.id, obj).then(res => {
-            console.log(res.data);
-            if (!res.data.state) {
-                alert(res.data.error);
-                return;
-            }
-            else {
-                axios.post('http://localhost:4000/patients/patients/' + this.props.match.params.id, obj).then(res => {
-                    console.log(res.data);
-                    alert(res.data.msg)
-                    return;
-                })
-                this.setState({
-                    roomId: '',
-                })
 
-            }
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+        var urlencoded = new URLSearchParams();
+        urlencoded.append("room", this.state.roomId);
+
+        var requestOptions = {
+            method: 'PUT',
+            headers: myHeaders,
+            body: urlencoded,
+            redirect: 'follow'
+        };
+
+        fetch("http://localhost:8000/api/v1/patients/" + this.props.match.params.id, requestOptions)
+            .then(response => response.text())
+            .then(result => alert(result))
+            .catch(error => alert(error));
+
+        this.setState({
+            roomId: '',
         })
     }
 
